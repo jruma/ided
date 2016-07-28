@@ -1,0 +1,26 @@
+
+nginx:
+  image: jwilder/nginx-proxy
+  ports:
+  - "80:80"
+  - "443:443"
+  volumes:
+  - "/var/run/docker.sock:/tmp/docker.sock"
+  container_name: nginx
+webserver:
+  build: .
+  environment:
+    VIRTUAL_HOST: ${VIRTUAL_HOST}
+  ports:
+  - "${EXTERNAL_PORT}:22"
+  volumes:
+  - "${LOCAL_PATH}:/var/www"
+  container_name: ${CONTAINER_NAME}
+db:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 'root'
+    MYSQL_DATABASE: 'default_database'
+  ports:
+  - "3307:3306"
+  container_name: mysql_server
