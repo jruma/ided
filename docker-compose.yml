@@ -14,22 +14,20 @@ services:
     build: .
     environment:
       VIRTUAL_HOST: ${HOSTNAME}.backend.dev
-    ports:
-    - "${EXTERNAL_PORT}:22"
     volumes:
     - "${BACKEND_PATH}:/var/www"
-    container_name: ${CONTAINER_NAME}
+    container_name: backend_webserver
 
   frontserver:
     build: .
     environment:
       VIRTUAL_HOST: ${HOSTNAME}.frontend.dev
-    ports:
-    - "${EXTERNAL_PORT}:22"
     volumes:
-    - "${FRONTEND_PATH}:/var/www"
-    container_name: ${CONTAINER_NAME}
-
+    - "${FRONTEND_PATH}:/src/app"
+    container_name: frontend_webserver
+    ports:
+    - "35729:35729"
+    - "3030:3000"
 
   db:
     image: mysql
