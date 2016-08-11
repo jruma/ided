@@ -5,25 +5,24 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # Install packages.
 RUN apt-get update
 RUN apt-get install -y \
-	vim \
-	git \
 	apache2 \
+	curl \
+	git \
+	libapache2-mod-php5 \
+    mysql-client \
+    nodejs \
+    npm \
+    openssh-server \
 	php5-cli \
 	php5-mysql \
 	php5-gd \
 	php5-curl \
 	php5-xdebug \
 	php5-mcrypt \
-	libapache2-mod-php5 \
-	curl \
-	mysql-client \
-	openssh-server \
-	phpmyadmin \
-	wget \
-	unzip \
 	supervisor \
-	nodejs \
-	npm
+	unzip \
+	vim \
+	wget
 RUN apt-get clean;  exit 0
 RUN php5enmod mcrypt;  exit 0
 
